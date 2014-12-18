@@ -1,0 +1,10 @@
+{
+  "name": "Arduino-Clima",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "johnny-five": "*",
+    "request": "*",
+    "events": "*"
+  }
+}
