@@ -15,8 +15,8 @@ arduino.on('ready', function(){
 	lcd.on('ready', function(){
 		console.log("LCD Pronto");
 		function mostraLcd(){
-			lcd.cursor(0,0).print("sandi piriguete");
-			lcd.cursor(1,0).print("pedro gato :)");
+			//aqui fica o codigo do lcd,
+			
 		}		
 	});
 });
