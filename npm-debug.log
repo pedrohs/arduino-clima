@@ -1,0 +1,250 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/pedro/Documents/Node.Js projetos/arduino-clima',
+5 verbose install   [ 'johnny-five', 'request' ] ]
+6 info preinstall Arduino-Clima@0.0.0
+7 warn package.json events@1.0.2 events is also the name of a node core module.
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping johnny-five@* /Users/pedro/Documents/Node.Js projetos/arduino-clima
+10 verbose already installed skipping request@* /Users/pedro/Documents/Node.Js projetos/arduino-clima
+11 silly resolved []
+12 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima
+13 verbose linkStuff [ false, false, false, '/Users/pedro/Documents/Node.Js projetos' ]
+14 info linkStuff Arduino-Clima@0.0.0
+15 verbose linkBins Arduino-Clima@0.0.0
+16 verbose linkMans Arduino-Clima@0.0.0
+17 verbose rebuildBundles Arduino-Clima@0.0.0
+18 verbose rebuildBundles [ 'events', 'johnny-five', 'request', 'serialport' ]
+19 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/events
+20 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/events
+21 info preinstall events@1.0.2
+22 verbose linkStuff [ false,
+22 verbose linkStuff   false,
+22 verbose linkStuff   false,
+22 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules' ]
+23 info linkStuff events@1.0.2
+24 verbose linkBins events@1.0.2
+25 verbose linkMans events@1.0.2
+26 verbose rebuildBundles events@1.0.2
+27 info install events@1.0.2
+28 info postinstall events@1.0.2
+29 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport
+30 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport
+31 info preinstall serialport@1.4.9
+32 verbose linkStuff [ false,
+32 verbose linkStuff   false,
+32 verbose linkStuff   false,
+32 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules' ]
+33 info linkStuff serialport@1.4.9
+34 verbose linkBins serialport@1.4.9
+35 verbose link bins [ { serialportlist: './bin/serialportList.js',
+35 verbose link bins     serialportterm: './bin/serialportTerminal.js' },
+35 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/.bin',
+35 verbose link bins   false ]
+36 verbose linkMans serialport@1.4.9
+37 verbose rebuildBundles serialport@1.4.9
+38 verbose rebuildBundles [ 'node-pre-gyp' ]
+39 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp
+40 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp
+41 info preinstall node-pre-gyp@0.5.19
+42 verbose linkStuff [ false,
+42 verbose linkStuff   false,
+42 verbose linkStuff   false,
+42 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules' ]
+43 info linkStuff node-pre-gyp@0.5.19
+44 verbose linkBins node-pre-gyp@0.5.19
+45 verbose link bins [ { 'node-pre-gyp': './bin/node-pre-gyp' },
+45 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/.bin',
+45 verbose link bins   false ]
+46 verbose linkMans node-pre-gyp@0.5.19
+47 verbose rebuildBundles node-pre-gyp@0.5.19
+48 verbose rebuildBundles [ 'mkdirp',
+48 verbose rebuildBundles   'nopt',
+48 verbose rebuildBundles   'npmlog',
+48 verbose rebuildBundles   'rc',
+48 verbose rebuildBundles   'request',
+48 verbose rebuildBundles   'rimraf',
+48 verbose rebuildBundles   'semver',
+48 verbose rebuildBundles   'tar',
+48 verbose rebuildBundles   'tar-pack' ]
+49 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/mkdirp
+50 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/mkdirp
+51 info preinstall mkdirp@0.5.0
+52 verbose linkStuff [ false,
+52 verbose linkStuff   false,
+52 verbose linkStuff   false,
+52 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+53 info linkStuff mkdirp@0.5.0
+54 verbose linkBins mkdirp@0.5.0
+55 verbose link bins [ { mkdirp: 'bin/cmd.js' },
+55 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/.bin',
+55 verbose link bins   false ]
+56 verbose linkMans mkdirp@0.5.0
+57 verbose rebuildBundles mkdirp@0.5.0
+58 verbose rebuildBundles [ 'minimist' ]
+59 info install mkdirp@0.5.0
+60 info postinstall mkdirp@0.5.0
+61 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/nopt
+62 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/nopt
+63 info preinstall nopt@2.2.1
+64 verbose linkStuff [ false,
+64 verbose linkStuff   false,
+64 verbose linkStuff   false,
+64 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+65 info linkStuff nopt@2.2.1
+66 verbose linkBins nopt@2.2.1
+67 verbose link bins [ { nopt: './bin/nopt.js' },
+67 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/.bin',
+67 verbose link bins   false ]
+68 verbose linkMans nopt@2.2.1
+69 verbose rebuildBundles nopt@2.2.1
+70 verbose rebuildBundles [ 'abbrev' ]
+71 info install nopt@2.2.1
+72 info postinstall nopt@2.2.1
+73 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/npmlog
+74 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/npmlog
+75 info preinstall npmlog@0.0.6
+76 verbose linkStuff [ false,
+76 verbose linkStuff   false,
+76 verbose linkStuff   false,
+76 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+77 info linkStuff npmlog@0.0.6
+78 verbose linkBins npmlog@0.0.6
+79 verbose linkMans npmlog@0.0.6
+80 verbose rebuildBundles npmlog@0.0.6
+81 verbose rebuildBundles [ 'ansi' ]
+82 info install npmlog@0.0.6
+83 info postinstall npmlog@0.0.6
+84 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/rc
+85 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/rc
+86 info preinstall rc@0.4.0
+87 verbose linkStuff [ false,
+87 verbose linkStuff   false,
+87 verbose linkStuff   false,
+87 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+88 info linkStuff rc@0.4.0
+89 verbose linkBins rc@0.4.0
+90 verbose link bins [ { rc: './index.js' },
+90 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/.bin',
+90 verbose link bins   false ]
+91 verbose linkMans rc@0.4.0
+92 verbose rebuildBundles rc@0.4.0
+93 verbose rebuildBundles [ 'deep-extend', 'ini', 'minimist', 'strip-json-comments' ]
+94 info install rc@0.4.0
+95 info postinstall rc@0.4.0
+96 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/request
+97 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/request
+98 info preinstall request@2.36.0
+99 verbose linkStuff [ false,
+99 verbose linkStuff   false,
+99 verbose linkStuff   false,
+99 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+100 info linkStuff request@2.36.0
+101 verbose linkBins request@2.36.0
+102 verbose linkMans request@2.36.0
+103 verbose rebuildBundles request@2.36.0
+104 verbose rebuildBundles [ 'aws-sign2',
+104 verbose rebuildBundles   'forever-agent',
+104 verbose rebuildBundles   'form-data',
+104 verbose rebuildBundles   'hawk',
+104 verbose rebuildBundles   'http-signature',
+104 verbose rebuildBundles   'json-stringify-safe',
+104 verbose rebuildBundles   'mime',
+104 verbose rebuildBundles   'node-uuid',
+104 verbose rebuildBundles   'oauth-sign',
+104 verbose rebuildBundles   'qs',
+104 verbose rebuildBundles   'tough-cookie',
+104 verbose rebuildBundles   'tunnel-agent' ]
+105 info install request@2.36.0
+106 info postinstall request@2.36.0
+107 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/rimraf
+108 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/rimraf
+109 info preinstall rimraf@2.2.8
+110 verbose linkStuff [ false,
+110 verbose linkStuff   false,
+110 verbose linkStuff   false,
+110 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+111 info linkStuff rimraf@2.2.8
+112 verbose linkBins rimraf@2.2.8
+113 verbose link bins [ { rimraf: './bin.js' },
+113 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/.bin',
+113 verbose link bins   false ]
+114 verbose linkMans rimraf@2.2.8
+115 verbose rebuildBundles rimraf@2.2.8
+116 info install rimraf@2.2.8
+117 info postinstall rimraf@2.2.8
+118 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/semver
+119 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/semver
+120 info preinstall semver@2.3.0
+121 verbose linkStuff [ false,
+121 verbose linkStuff   false,
+121 verbose linkStuff   false,
+121 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+122 info linkStuff semver@2.3.0
+123 verbose linkBins semver@2.3.0
+124 verbose link bins [ { semver: './bin/semver' },
+124 verbose link bins   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/.bin',
+124 verbose link bins   false ]
+125 verbose linkMans semver@2.3.0
+126 verbose rebuildBundles semver@2.3.0
+127 info install semver@2.3.0
+128 info postinstall semver@2.3.0
+129 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/tar
+130 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/tar
+131 info preinstall tar@0.1.19
+132 verbose linkStuff [ false,
+132 verbose linkStuff   false,
+132 verbose linkStuff   false,
+132 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+133 info linkStuff tar@0.1.19
+134 verbose linkBins tar@0.1.19
+135 verbose linkMans tar@0.1.19
+136 verbose rebuildBundles tar@0.1.19
+137 verbose rebuildBundles [ 'block-stream', 'fstream', 'inherits' ]
+138 info install tar@0.1.19
+139 info postinstall tar@0.1.19
+140 verbose rebuild bundle /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/tar-pack
+141 info build /Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules/tar-pack
+142 info preinstall tar-pack@2.0.0
+143 verbose linkStuff [ false,
+143 verbose linkStuff   false,
+143 verbose linkStuff   false,
+143 verbose linkStuff   '/Users/pedro/Documents/Node.Js projetos/arduino-clima/node_modules/serialport/node_modules/node-pre-gyp/node_modules' ]
+144 info linkStuff tar-pack@2.0.0
+145 verbose linkBins tar-pack@2.0.0
+146 verbose linkMans tar-pack@2.0.0
+147 verbose rebuildBundles tar-pack@2.0.0
+148 verbose rebuildBundles [ 'debug',
+148 verbose rebuildBundles   'fstream',
+148 verbose rebuildBundles   'fstream-ignore',
+148 verbose rebuildBundles   'graceful-fs',
+148 verbose rebuildBundles   'once',
+148 verbose rebuildBundles   'readable-stream',
+148 verbose rebuildBundles   'uid-number' ]
+149 info install tar-pack@2.0.0
+150 info postinstall tar-pack@2.0.0
+151 info install node-pre-gyp@0.5.19
+152 info postinstall node-pre-gyp@0.5.19
+153 info install serialport@1.4.9
+154 verbose unsafe-perm in lifecycle false
+155 info serialport@1.4.9 Failed to exec install script
+156 error serialport@1.4.9 install: `node-pre-gyp install --fallback-to-build`
+156 error Exit status 1
+157 error Failed at the serialport@1.4.9 install script.
+157 error This is most likely a problem with the serialport package,
+157 error not with npm itself.
+157 error Tell the author that this fails on your system:
+157 error     node-pre-gyp install --fallback-to-build
+157 error You can get their info via:
+157 error     npm owner ls serialport
+157 error There is likely additional logging output above.
+158 error System Darwin 14.0.0
+159 error command "node" "/usr/local/bin/npm" "install"
+160 error cwd /Users/pedro/Documents/Node.Js projetos/arduino-clima
+161 error node -v v0.10.35
+162 error npm -v 1.4.28
+163 error code ELIFECYCLE
+164 verbose exit [ 1, true ]

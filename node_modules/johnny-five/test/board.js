@@ -63,6 +63,28 @@ exports["Initialization"] = {
       test.ok(true);
       test.done();
     });
+  },
+
+  ioHasError: function(test) {
+    test.expect(1);
+
+    var sp = new SerialPort("/dev/foo", {
+      baudrate: 57600,
+      buffersize: 128
+    });
+
+    var board = new Board({
+      port: sp,
+      debug: false,
+      repl: false
+    });
+
+    board.on("error", function(msg) {
+      test.equals("ioHasError", msg);
+      test.done();
+    });
+
+    sp.emit("error", "ioHasError");
   }
 };
 
@@ -112,12 +134,18 @@ exports["static"] = {
     test.done();
   },
 
-  "Board.Array": function(test) {
+  "Boards": function(test) {
     test.expect(1);
+    test.equal(five.Boards, five.Board.Array);
+    test.done();
+  },
+
+  "Board.Array": function(test) {
+    test.expect(2);
 
     var io = new MockFirmata();
 
-    var boards = new five.Boards([{
+    var boards = new five.Board.Array([{
       id: "A",
       repl: false,
       debug: false,
@@ -130,7 +158,12 @@ exports["static"] = {
     }]);
 
     test.equals(2, boards.length);
-    test.done();
+
+    boards.on("ready", function() {
+      test.ok(true);
+      test.done();
+    });
+
   }
 };
 

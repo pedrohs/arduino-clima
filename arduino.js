@@ -1,14 +1,12 @@
-var five =  require('johnny-five');
-var events = require('events'); 
-var eventEmitter = new events.EventEmitter();  
-var clima = require("./clima.js");
+var five =  require('johnny-five'),
+	clima = require("./clima.js"),
+	arduino = five.Board('/dev/ttyACM0'),
+	dados;
 
-var arduino = five.Board('/dev/ttyACM0');
-
-if(clima.dados()){
-	console.log("certo");
-}else{
-	console.log("Erro");
+exports.pegaDados = function(status, dados){
+	if(status){
+		dados = this.dados;			
+	}
 }
 
 arduino.on('ready', function(){
@@ -22,17 +20,6 @@ arduino.on('ready', function(){
 
 	lcd.on('ready', function(){
 		console.log("LCD Pronto");
-		console.log(clima.temperatura());
-		if(clima.temperatura() == undefined){
-			lcd.cursor(0,0);
-			lcd.print("Carregando");
-			lcd.cursor(1,0);
-			lcd.print("Informacoes");
 
-
-		}else{
-			lcd.print("Temp:" + clima.temperatura());
-		}
-		
-	})
+	});
 });
