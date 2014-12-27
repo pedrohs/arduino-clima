@@ -27,7 +27,9 @@ depois no arquivo: *clima.js* vá ate a linha 10 substitua a linha pelo codigo a
 var URL = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D [Cole woeid aqui] %20and%20u%3D%22c%22&format=json&diagnostics=true&callback=';
 ```
 
+Agradecimentos ao [Gpedro] pela ajuda no codigo.
 
 
+[Gpedro]:https://github.com/gpedro
 [Johnny Five]:https://github.com/rwaldron/johnny-five
 [Request]:https://github.com/request/request
