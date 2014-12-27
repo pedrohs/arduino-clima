@@ -1,13 +1,7 @@
 var five =  require('johnny-five'),
-	clima = require("./clima.js"),
-	arduino = five.Board('/dev/ttyACM0'),
-	dados;
-
-exports.pegaDados = function(status, dados){
-	if(status){
-		dados = this.dados;			
-	}
-}
+clima = require("./clima.js"),
+arduino = five.Board('/dev/ttyACM0'),
+dados;
 
 arduino.on('ready', function(){
 	console.log("Arduino Pronto");
@@ -20,6 +14,16 @@ arduino.on('ready', function(){
 
 	lcd.on('ready', function(){
 		console.log("LCD Pronto");
-
+		function mostraLcd(){
+			lcd.cursor(0,0).print("sandi piriguete");
+			lcd.cursor(1,0).print("pedro gato :)");
+		}		
 	});
 });
+
+exports.pegaDados = function(status, dados){
+	if(status){
+		dados = this.dados;		
+		mostraLcd();	
+	}
+}
