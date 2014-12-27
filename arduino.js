@@ -1,7 +1,8 @@
 var five =  require('johnny-five'),
 clima = require("./clima.js"),
 arduino = five.Board('/dev/ttyACM0'),
-dados;
+dadosClima,
+lcd;
 
 arduino.on('ready', function(){
 	console.log("Arduino Pronto");
@@ -13,17 +14,18 @@ arduino.on('ready', function(){
 	});
 
 	lcd.on('ready', function(){
-		console.log("LCD Pronto");
-		function mostraLcd(){
-			//aqui fica o codigo do lcd,
-			
-		}		
+		console.log("LCD Pronto");		
+		lcd.clear().cursor(0,0).print("Carregando");
 	});
 });
 
 exports.pegaDados = function(status, dados){
 	if(status){
-		dados = this.dados;		
-		mostraLcd();	
+		dadosClima = dados;		
+		mostraLcd(true);	
 	}
+}
+
+function mostraLcd(status){
+	lcd.print(dadosClima['temp']);
 }
