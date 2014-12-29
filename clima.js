@@ -1,15 +1,24 @@
 var request = require("request"),
 YQL = require('yql'),
+fs = require('fs'),
 tempGraus,
 umidade,
 ventoVelocidade,
 dados = new Array(),
 arduino = require("./arduino.js"),
-codeClima = new Array();
+codeClima = new Array(),
+woeid;
 
+function carregarConfigs(){
+	var data = fs.readFileSync('./config.json');
+	var config = JSON.parse(data);
+
+	console.log("Configs carregadas");
+	woeid = config['cidadeId'];
+	pegaDados(app);
+}
 
 function pegaDados(callback){
-	var woeid = 455882;
 	var query = new YQL("select * from weather.forecast where woeid="+ woeid +" and u='c'");
 	query.exec(function(erro, data){
 		dados['temp'] = data.query.results.channel.item.condition.temp;
@@ -38,7 +47,7 @@ function pegaDados(callback){
 
 function app(estado){
 	if(estado){
-		console.log("dados pegos")
+		console.log("Dados prontos")
 		arduino.pegaDados(true, dados);
 	}else{
 		console.log("erro nos dados");
@@ -47,7 +56,7 @@ function app(estado){
 }
 
 exports.ready = function(){
-	pegaDados(app);
+	carregarConfigs();
 }
 
 codeClima[0] = 'tufão';

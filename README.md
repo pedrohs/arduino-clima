@@ -3,11 +3,11 @@
 Utilizando os seguintes modulos:
 
   - [Johnny Five]
-  - [Request]
+  - [YQL]
 
-Request busca as informações do serviço da Yahoo Weather Api
+Utilizando o YQL da yahoo para pegar informações tanto do clima quanto das cidades para o painel de controle
 ### Version
-1.0.0
+1.2
 
 ### Instalação
 
@@ -20,16 +20,9 @@ $ node arduino.js
 
 Para alterar a cidade  
 --
-acesse este site: http://woeid.rosselliot.co.nz/ para descobrir o woeid da sua cidade
 
-depois no arquivo: *clima.js* vá ate a linha 10 substitua a linha pelo codigo a baixo, colocando o woeid no local indicado sem espaços e chaves!
-```sh
-var URL = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D [Cole woeid aqui] %20and%20u%3D%22c%22&format=json&diagnostics=true&callback=';
-```
-
-Agradecimentos ao [Gpedro] pela ajuda no codigo.
+depois de iniciar o servidor acesse pelo navegador: http://localhost:3000/
 
 
-[Gpedro]:https://github.com/gpedro
 [Johnny Five]:https://github.com/rwaldron/johnny-five
-[Request]:https://github.com/request/request
+[YQL]:https://github.com/rwaldron/johnny-five

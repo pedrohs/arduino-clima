@@ -1,0 +1,72 @@
+#centro > h1 {
+	padding: 0;
+	margin: 0;
+}
+#centro > h1 > span {
+	color:#00979C;
+}
+#topo {
+	width: 100%;
+	padding: 18px;
+	background-color: #f2f2f2;
+	-moz-box-shadow: inset 0px 0px 7px 0px rgba(84,84,84,1);
+	border-top: 15px solid #3b3b3b;
+	box-shadow: inset 0px 0px 7px 0px rgba(84,84,84,1);
+	-webkit-box-shadow: inset 0px 0px 7px 0px rgba(84,84,84,1);
+	margin-bottom: 15px;
+}
+#conteudo {
+	min-width: 320px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+#resultadoCidades {
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	overflow: hidden;
+	display: none;
+}
+#resultadoCidades > .cidade > span {
+	border-left: 1px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+	display: block;
+	overflow: hidden;
+	height: 51px;
+	padding: 15px;
+}
+#resultadoCidades > .cidade > span:last-child {
+	padding: 8px;
+}
+#resultadoCidades > .cidade > span:first-child {
+	padding: 13px;
+	padding-left: 27px;
+}
+#carregando {
+	color: #bababa;
+	display: none;
+}
+
+.pulse{
+  -webkit-animation: animationFrames linear 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes animationFrames {
+  0% {
+    opacity:1;
+    -webkit-transform:  ;
+  }
+  50% {
+    opacity:0.4;
+    -webkit-transform:  ;
+  }
+  100% {
+    opacity:0.9876476107460936;
+    -webkit-transform:  ;
+  }
+  101% {
+    opacity:1;
+    -webkit-transform:  ;
+  }
+}

@@ -3,7 +3,9 @@ clima = require("./clima.js"),
 arduino = five.Board('/dev/ttyACM0'),
 web = require("./web.js"),
 dadosClima = new Array(),
-lcd;
+lcd,
+tempoLcd,
+frame;
 
 arduino.on('ready', function(){
 	console.log("Arduino Pronto");
@@ -34,16 +36,26 @@ exports.pegaDados = function(status, dados){
 	}
 }
 
+exports.recarregar = function(){
+	clearInterval(tempoLcd);
+	lcd.clear().print("Configurações");
+	lcd.cursor(1,0).print("Alteradas");
+	clima.ready();
+	frame = 1;
+}
+
 function mostraLcd(status){
 	if(status){		
 		frameLcd();
-		arduino.loop(5000, frameLcd);
+		tempoLcd = setInterval(function(){
+			frameLcd();
+		}, 5000);
 	}else{
 		lcd.clear().print("Erro Encontrado");
 	}
 }
 
-var frame = 1;
+frame = 1;
 function frameLcd(){	
 	switch(frame){
 		case 1:
