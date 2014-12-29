@@ -1,12 +1,12 @@
 var five =  require('johnny-five'),
 clima = require("./clima.js"),
 arduino = five.Board('/dev/ttyACM0'),
+web = require("./web.js"),
 dadosClima = new Array(),
 lcd;
 
 arduino.on('ready', function(){
 	console.log("Arduino Pronto");
-
 	lcd = new five.LCD({
 		pins: [12, 11, 5, 4, 3, 2],
 		rows: 2,
@@ -26,7 +26,9 @@ arduino.on('ready', function(){
 exports.pegaDados = function(status, dados){
 	if(status){
 		dadosClima = dados;		
-		mostraLcd(true);	
+		mostraLcd(true);
+		var cidade = dadosClima['city'] + "/" + dadosClima['estado'];
+		web.cidade(cidade);	
 	}else{
 		mostraLcd(false);
 	}
@@ -46,7 +48,7 @@ function frameLcd(){
 	switch(frame){
 		case 1:
 			lcd.clear().print("Dados Climaticos");
-			lcd.cursor(1,0).print("Hoje " + dadosClima['dias'][0]['date']);
+			lcd.cursor(1,0).print("Hoje " + dadosClima['dias'][0].date);
 			break;
 		case 2:
 			lcd.clear().print("Temperatura: " + dadosClima['temp']);
@@ -58,14 +60,14 @@ function frameLcd(){
 			break;
 		case 4:
 			lcd.clear().print("Dados Climaticos");
-			lcd.cursor(1,0).print(dadosClima['dias'][1]['date'] + " -->");
+			lcd.cursor(1,0).print(dadosClima['dias'][1].date + " -->");
 			break;
 		case 5: 
-			lcd.clear().print("Temp: Max: " + dadosClima['dias'][1]['high'] + ":graus:");
-			lcd.cursor(1,6).print("Min: " + dadosClima['dias'][1]['low'] + ":graus:");
+			lcd.clear().print("Temp: Max: " + dadosClima['dias'][1].high + ":graus:");
+			lcd.cursor(1,6).print("Min: " + dadosClima['dias'][1].low + ":graus:");
 			break;
 		case 6:
-			var code = dadosClima['dias'][1]['code'];
+			var code = dadosClima['dias'][1].code;
 			lcd.clear().print(dadosClima['city'] + "/" + dadosClima['estado']);
 			lcd.cursor(1,0).print(dadosClima['code'][code]);
 			break;

@@ -1,4 +1,5 @@
 var request = require("request"),
+YQL = require('yql'),
 tempGraus,
 umidade,
 ventoVelocidade,
@@ -6,38 +7,33 @@ dados = new Array(),
 arduino = require("./arduino.js"),
 codeClima = new Array();
 
+
 function pegaDados(callback){
-	var URL = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D455882%20and%20u%3D%22c%22&format=json&diagnostics=true&callback=';
-	request(URL, function(error, response, body){
-		if (!error && response.statusCode == 200) {
-			var body = JSON.parse(body);
-			dados['temp'] = body['query']['results']['channel']['item']['condition']['temp'];
-			dados['temp'] = dados['temp'] + ":graus:";
+	var woeid = 455882;
+	var query = new YQL("select * from weather.forecast where woeid="+ woeid +" and u='c'");
+	query.exec(function(erro, data){
+		dados['temp'] = data.query.results.channel.item.condition.temp;
+		dados['temp'] = dados['temp'] + ":graus:";
 
-			dados['umid'] = body['query']['results']['channel']['atmosphere']['humidity'];
-			dados['umid'] = dados['umid'] + "%"
+		dados['umid'] = data.query.results.channel.atmosphere.humidity;
+		dados['umid'] = dados['umid'] + "%";
 
-			dados['vento'] = body['query']['results']['channel']['wind']['speed'];
-			dados['vento'] = dados['vento'] * 1.609344;
-			dados['vento'] = dados['vento'].toFixed(1);
-			dados['vento'] = dados['vento'] + "Km/h";
+		dados['vento'] = data.query.results.channel.wind.speed;
+		dados['vento'] = dados['vento'] + "Km/h";
 
-			dados['visib'] = body['query']['results']['channel']['atmosphere']['visibility'];
-			dados['visib'] = dados['visib'] + "mi";
+		dados['visib'] = data.query.results.channel.atmosphere.visibility;
+		dados['visib'] = dados['visib'] + "km";
+		
+		var dias = data.query.results.channel.item.forecast;
+		dados['dias'] = dias;
+		dados['code'] = codeClima;
 
-			var dias = body['query']['results']['channel']['item']['forecast'];
-			dados['dias'] = dias;
-			dados['code'] = codeClima;
+		dados['city'] = data.query.results.channel.location.city;
+		dados['estado'] = data.query.results.channel.location.region;
 
-			dados['city'] = body['query']['results']['channel']['location']['city'];
-			dados['estado'] = body['query']['results']['channel']['location']['region'];
-
-			callback(true);
-		}else{
-			console.log(error);
-			callback(false);
-		}
+		callback(true);
 	});
+
 }
 
 function app(estado){
