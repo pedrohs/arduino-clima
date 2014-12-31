@@ -25,6 +25,10 @@ Para alterar a cidade
 
 depois de iniciar o servidor acesse pelo navegador: http://localhost:3000/
 
+Agradecimentos á [Gpedro] por ajudar no codigo.
+
+![Alt](http://i59.tinypic.com/5d2gw4.jpg)
+![Alt](http://i61.tinypic.com/2hqaru9.png)
 
 [Johnny Five]:https://github.com/rwaldron/johnny-five
 [YQL]:https://github.com/rwaldron/johnny-five
