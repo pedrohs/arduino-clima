@@ -2,15 +2,14 @@ var http = require('http'),
 io = require('socket.io').listen(servidor),
 fs = require('fs'),
 YQL = require('yql'),
-arduino = require('./arduino.js'),
+clima = require('./clima.js'),
 port = process.env.PORT || 3000,
-cidadeAtual,
 dados = {};
 
 var servidor = http.createServer(function(req, res){
 	if(req.url == '/'){
 		res.writeHead(200, {'Content-Type': 'text/html'});
-		res.write(fs.readFileSync('index.html'));		
+		res.write(fs.readFileSync('web/index.html'));		
 		res.end();
 	}else if(req.url == '/web/css/bootstrap.css'){
 		res.writeHead(200, {'Content-Type': 'text/css'});
@@ -27,31 +26,24 @@ var servidor = http.createServer(function(req, res){
 	}
 });
 
-exports.cidade = function(city){
-	cidadeAtual = city;
-	enviarDadosFront();
-}
-
 servidor.listen(port, function(){
 	console.log("Servidor HTTP Online");
 });
 var socket = io.listen(servidor);
 
-io.on('connection', function(socket){
+//inicia a conexão com o socket
+io.on('connection', function(socket){ 
 	console.log("Usuario Conectado");
 
-	socket.on('pegaCidade', function(io){
-		console.log("emit recebido");
-		enviarDadosFront();
-	});
-
+	getDadosFront();
+	
 	socket.on('procuraCidade', function(cidade){
 		var query = new YQL("select * from geo.placefinder where text='" + cidade + "'");
 		query.exec(function(erro, data){
+			var dados = {};
 			if(!erro){
-				var cityName = dados['cidade'] = data.query.results;
-				if(cityName == null){
-					dados['cidade'] = 'Cidade não encontrada';
+				if(data.query.results == null){
+					dados['cidade'] = 'Não encontrada';
 					dados['woeid'] = 'Indisponivel';
 					dados['pais'] = 'Indisponivel';
 					dados['estado'] = 'Indisponivel';
@@ -66,16 +58,17 @@ io.on('connection', function(socket){
 						dados['estado'] = Result.statecode;
 						
 						socket.emit('resultadoCidade', dados);
-						console.log("Enviado" + dados['cidade']);
 					}else{
 						for (var i = 0; i < Result.length; i++) {
-							dados['cidade'] = data.query.results.Result[i].city;
-							dados['woeid'] = data.query.results.Result[i].woeid;
-							dados['pais'] = data.query.results.Result[i].country;
-							dados['estado'] = data.query.results.Result[i].statecode;
+							if(Result[i].city !== null){
+								dados['cidade'] = data.query.results.Result[i].city;
+								dados['woeid'] = data.query.results.Result[i].woeid;
+								dados['pais'] = data.query.results.Result[i].country;
+								dados['estado'] = data.query.results.Result[i].statecode;
 
-							socket.emit('resultadoCidade', dados);
-							console.log("Enviado" + dados['cidade']);
+								socket.emit('resultadoCidade', dados);
+								console.log("Enviado" + dados['cidade']);
+							}							
 						};	
 					}
 
@@ -86,23 +79,35 @@ io.on('connection', function(socket){
 		});
 	}); //Procura Cidade
 
-	socket.on('selectCidade', function(woeid){
-		salveConfig(woeid);		
-	});
+socket.on('alterarConfigs', function(data){
+	salveConfig(data);		
+});
 });
 
-io.on('disconnect', function(socket){
-	console.log("Usuario Desconectado");
-});
-
-function enviarDadosFront(){
-	socket.emit('cidade', cidadeAtual);
+exports.dados = function(cidade, tempo, woeid){	
+	dados['cidade'] = cidade;
+    dados['woeid'] = woeid;
+	var mili = tempo;
+	var seg = mili / 1000;
+	var min = seg / 60;
+	var horas = Math.floor(min / 60);
+	min = min % 60;
+	dados['tempoMin'] = min;
+	dados['tempoHoras'] = horas;
+	getDadosFront();
 }
 
-function salveConfig(woeid){
+function getDadosFront(){
+	socket.emit('dados', dados);
+}
+
+function salveConfig(data){
+	var horas = data['horas'] * 3600000;
+	var minutos = data['minutos'] * 60000;
+	var tempo = horas + minutos;
 	var config = {
-		cidadeId: woeid,
-		atualização: 60 
+		cidadeId: data['woeid'],
+		atualização: tempo
 	};
 
 	var data = JSON.stringify(config);
@@ -113,6 +118,6 @@ function salveConfig(woeid){
 			return;
 		}
 		console.log("Configurações Salvas");
-		arduino.recarregar();
+		clima.get('reload');
 	});
 }

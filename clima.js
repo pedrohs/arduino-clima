@@ -4,69 +4,87 @@ fs = require('fs'),
 tempGraus,
 umidade,
 ventoVelocidade,
-dados = new Array(),
 arduino = require("./arduino.js"),
 codeClima = new Array(),
-woeid;
+woeid,
+tempoAtualiza,
+dados = new Array(),
+timer;
 
-function carregarConfigs(){
+function getConfigs(funcao){
 	var data = fs.readFileSync('./config.json');
 	var config = JSON.parse(data);
 
-	console.log("Configs carregadas");
+	console.log("Configs Carregadas");
 	woeid = config['cidadeId'];
-	pegaDados(app);
+    dados['woeid'] = woeid;
+	tempoAtualiza = config['atualização'];
+	pegaDados(funcao);
+	clearInterval(timer);
+	timer = setInterval(function(){
+		getConfigs(sendReload);
+		console.log("Dados Atualizados");
+	}, tempoAtualiza);
 }
 
 function pegaDados(callback){
 	var query = new YQL("select * from weather.forecast where woeid="+ woeid +" and u='c'");
 	query.exec(function(erro, data){
-		dados['temp'] = data.query.results.channel.item.condition.temp;
-		dados['temp'] = dados['temp'] + ":graus:";
+		if(!erro){			
+			dados['temp'] = data.query.results.channel.item.condition.temp;
+			dados['temp'] = dados['temp'] + ":graus:";
 
-		dados['umid'] = data.query.results.channel.atmosphere.humidity;
-		dados['umid'] = dados['umid'] + "%";
+			dados['umid'] = data.query.results.channel.atmosphere.humidity;
+			dados['umid'] = dados['umid'] + "%";
 
-		dados['vento'] = data.query.results.channel.wind.speed;
-		dados['vento'] = dados['vento'] + "Km/h";
+			dados['vento'] = data.query.results.channel.wind.speed;
+			dados['vento'] = dados['vento'] + "Km/h";
 
-		dados['visib'] = data.query.results.channel.atmosphere.visibility;
-		dados['visib'] = dados['visib'] + "km";
-		
-		var dias = data.query.results.channel.item.forecast;
-		dados['dias'] = dias;
-		dados['code'] = codeClima;
+			dados['visib'] = data.query.results.channel.atmosphere.visibility;
+			dados['visib'] = dados['visib'] + "km";
 
-		dados['city'] = data.query.results.channel.location.city;
-		dados['estado'] = data.query.results.channel.location.region;
+			var dias = data.query.results.channel.item.forecast;
+			dados['dias'] = dias;
+			dados['code'] = codeClima;
 
-		callback(true);
+			dados['city'] = data.query.results.channel.location.city;
+			dados['estado'] = data.query.results.channel.location.region;
+
+			dados['tempoAtualiza'] = tempoAtualiza;
+			
+			console.log("Dados Carregados");
+			callback();
+		}else{
+			console.log(erro);
+			dados = "erro";
+		}
 	});
-
 }
 
-function app(estado){
-	if(estado){
-		console.log("Dados prontos")
-		arduino.pegaDados(true, dados);
-	}else{
-		console.log("erro nos dados");
-		arduino.pegaDados(false);
+exports.get = function(type){
+	if(type == 'get'){
+		getConfigs(sendSync);
+	}else if(type == 'reload'){
+		getConfigs(sendReload);
 	}
 }
 
-exports.ready = function(){
-	carregarConfigs();
+function sendSync(){
+	arduino.getDados(dados);
+}
+
+function sendReload(){
+	arduino.reloadDados(dados);
 }
 
 codeClima[0] = 'tufão';
-codeClima[1] = 'tempestade tropical';
+codeClima[1] = 'tempes. tropical';
 codeClima[2] = 'furacão';
-codeClima[3] = 'temporais severos';
+codeClima[3] = 'tempo. severos';
 codeClima[4] = 'temporais';
-codeClima[5] = 'chuva mista e neve';
-codeClima[6] = 'chuva mista e granizo';
-codeClima[7] = 'neve mista e granizo';
+codeClima[5] = 'chuva e neve';
+codeClima[6] = 'chuva e granizo';
+codeClima[7] = 'neve e granizo';
 codeClima[8] =  'garoa que se congela';
 codeClima[9] =  'garoa';
 codeClima[10] = 'chuva que se congela';
@@ -86,9 +104,9 @@ codeClima[23] = 'estrondosos';
 codeClima[24] = 'ventosos';
 codeClima[25] = 'frio';
 codeClima[26] = 'nublados';
-codeClima[27] = 'pela maior parte nublados (noite)';
+codeClima[27] = 'maior parte nublado';
 codeClima[28] = 'pela maior parte nublados (dia)';
-codeClima[29] = 'em parte nublado (noite)';
+codeClima[29] = 'em parte nublado';
 codeClima[30] = 'em parte nublado (dia)';
 codeClima[31] = 'claros (noite)';
 codeClima[32] = 'cheios de sol';

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arduino Clima</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="web/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="web/css/style.css">
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	var socket = io(),
+	horas = 0,
+	minutos = 0,
+	dados = {};
+
+	socket.on('dados', function(data){
+		console.log("dados recebidos" + data);
+		$("#cidade").text(data['cidade']);
+		var tempo = data['tempoHoras'] + "h:" + data['tempoMin'] + "m";
+		$("#tempoAtualiza").text(tempo);
+        horas = data['tempoHoras'];
+        minutos = data['tempoMin'];
+
+		$("#minutos").val(data['tempoMin']);
+		$("#horas").val(data['tempoHoras']);
+		dados['woeid'] = data['woeid'];
+	});
+
+	socket.on('resultadoCidade', function(data){
+		
+		var html = "<div class='cidade row'>"+
+					"<span class='col-md-4 col-xs-12 text-center'>Cidade: "+data['cidade']+"</span>"+
+					"<span class='col-md-3 col-xs-12 text-center'>Estado: "+data['estado']+"</span>"+
+					"<span class='col-md-3 col-xs-12 text-center'>Pais: "+data['pais']+"</span>"+
+					"<span class='col-md-2 col-xs-12 text-center'><a id='"+data['woeid']+"' class='btn btn-info selecionaCidade'>Selecionar</a></span>"+
+					"</div>";
+		$(html).appendTo("#resultadoCidades");
+		$("#carregando").removeClass('pulse').hide();
+		$("#resultadoCidades").fadeIn(500);
+	});
+
+	$(document).ready(function(){
+		socket.emit('pegaCidade', {});
+		console.log("emit enviado");
+
+		$(document).on('click', '.selecionaCidade', function(){		
+			$(".selecionaCidade").removeClass('disabled').text('Confirmar');
+			$(this).addClass("disabled").text("Selecionado");
+			var woeid = $(this).attr('id');
+			dados['woeid'] = woeid;
+		});
+
+		$("#procuraCidade").submit(function(event){
+			var cidade = $("#inputCidade").val();
+			socket.emit('procuraCidade', cidade);
+			$("#carregando").addClass('pulse').show();
+			$(".cidade").remove();
+			console.log("procurar cidades enviado");
+			return false;
+		});
+
+		$("#salvarAlterações").click(function(){
+			dados['horas'] = horas;
+			dados['minutos'] = minutos;
+            console.log(dados);
+			socket.emit('alterarConfigs', dados);
+		});
+
+		$("#addHoras").click(function(){
+			horas--;
+			$("#horas").val(horas);
+			if(horas <= 0){
+				horas = 0;
+				$("#horas").val(horas);
+			}
+		});
+		$("#removeHoras").click(function(){
+			horas++;
+			$("#horas").val(horas);
+			if(horas >= 60){
+				horas = 59;
+				$("#horas").val(horas);
+			}
+		});
+		$("#RemoveMinutos").click(function(){
+			minutos--;
+			$("#minutos").val(minutos);
+			if(minutos <= 0){
+				minutos = 0;
+				$("#minutos").val(minutos);
+			}
+		});
+		$("#AddMinutos").click(function(){
+			minutos++;
+			$("#minutos").val(minutos);
+			if(minutos >= 60){
+				minutos = 59;
+				$("#minutos").val(minutos);
+			}
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="topo">
+		<div class="row" id="centro">
+			<h1 class="col-md-12 text-center"><span>Arduino</span>Clima v1.2</h1>
+			<h2 class="col-md-12 text-center"><small>Desenvolvido por Pedro Henrique</small></h2>
+		</div>
+	</div>
+
+	<div id="conteudo"><!--Conteudo-->
+		<p class="lead">Tempo de atualização: <span id="tempoAtualiza" class="text-success">Carregando.</span> Cidade definida: <span id="cidade" class="text-info">Carregando.</span></p>
+		<div class="col-md-12">
+			<h3>Alterar Cidade:</h3>
+			<form id="procuraCidade">
+				<div class="form-group">
+					<div class="input-group">
+						<input id="inputCidade" type="text" class="form-control" placeholder="Digite o nome da sua cidade.">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-success">Procurar</button>
+						</span>
+					</div>
+				</div>
+			</form>
+			<h1 id="carregando" class="text-center">Carregando...</h1>
+			<div id="resultadoCidades"></div>
+			<h3>Alterar tempo de atualização:</h3>
+			<form id="setTempo" class="row">
+				
+				<div class="input-group form-inline	cold-md-6">
+					<span class="input-group-btn">
+						<a id="addHoras"  class="btn btn-default">-</a>
+					</span>
+					<input id="horas" type="number" class="form-control" placeholder="Horas">
+					<span class="input-group-btn">
+						<a id="removeHoras"  class="btn btn-default">+</a>
+					</span>
+
+					<span class="input-group-btn">
+						<a id="RemoveMinutos"  class="btn btn-default">-</a>
+					</span>
+					<input id="minutos" type="number" class="form-control" placeholder="Minutos">
+					<span class="input-group-btn">
+						<a id="AddMinutos" class="btn btn-default">+</a>
+					</span>
+				</div>
+			</form>
+		</div>
+		<button id="salvarAlterações" class="btn btn-info">Salvar Alterações</button>
+	</div><!--Fim Conteudo-->
+</body>
+</html>

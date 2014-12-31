@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "johnny-five": "*",
-    "request": "*",
+    "async": "*",
     "yql": "*",
     "socket.io": "*"
   }
