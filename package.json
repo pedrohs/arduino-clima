@@ -1,11 +1,12 @@
 {
   "name": "Arduino-Clima",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "johnny-five": "*",
-    "async": "*",
-    "yql": "*",
-    "socket.io": "*"
+    "async": "0.9.0",
+    "johnny-five": "0.8.36",
+    "request": "2.51.0",
+    "socket.io": "1.2.1",
+    "yql": "1.0.2"
   }
 }
