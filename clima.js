@@ -1,5 +1,4 @@
-var request = require("request"),
-YQL = require('yql'),
+var YQL = require('yql'),
 fs = require('fs'),
 tempGraus,
 umidade,
