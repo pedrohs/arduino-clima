@@ -10,6 +10,11 @@ $ npm install
 $ node arduino.js
 ```
 
+### Configuração do arduino
+
+- Abra a IDE do Arduino, selecione: File > Examples > Firmata > StandardFirmata.
+- Clique no botão Upload.
+
 ### Dependências utilizadas
 * [Johnny Five](https://github.com/rwaldron/johnny-five)
 * [YQL](https://github.com/derek/node-yql)
